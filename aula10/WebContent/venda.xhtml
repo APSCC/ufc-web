@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Loja</title>
+</head>
+<body>
+
+	<h:messages></h:messages>
+
+	<h:form>
+		Data: <h:inputText value="#{vendaBean.venda.data}">
+			<f:convertDateTime pattern="dd/mm/yyyy"></f:convertDateTime>
+		</h:inputText>
+		<br />
+		Vendedor to String: <h:outputText value="#{vendaBean.venda.vendedor}">
+			<f:converter converterId="vendedorConverter"/>
+		</h:outputText>
+		<br />
+<!-- 		Vendedor: <h:selectOneMenu value="#{vendaBean.venda.vendedor}"> -->
+<!-- 			<f:converter converterId="vendedorConverter"/> -->
+<!-- 			<f:selectItems value="#{vendedorBean.vendedores}" var="v" -->
+<!-- 				itemLabel="#{v.nome}" itemValue="#{v}" > -->
+<!-- 			</f:selectItems> -->
+<!-- 		</h:selectOneMenu> -->
+		Vendedores: <h:selectManyMenu value="#{vendaBean.venda.vendedores}" style="width: 100px; height: 100px;">
+			<f:converter converterId="vendedorConverter"/>
+			<f:selectItems value="#{vendedorBean.vendedores}" var="v"
+				itemLabel="#{v.nome}" itemValue="#{v}" >
+			</f:selectItems>
+		</h:selectManyMenu>
+		
+		<br />
+		<h:commandButton action="#{vendaBean.salvar()}" value="Salvar"></h:commandButton>
+	</h:form>
+</body>
+</html>

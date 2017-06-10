@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Escola</title>
+</h:head>
+<h:body>
+	<h1>Escola <h:outputText value="#{escolaBean.name}"/> </h1>
+	<h:messages showSummary="false" showDetail="true" />
+	<h:form>
+		<h:outputLabel rendered="#{alunoBean.showId}" value="Id: #{alunoBean.aluno.id}"/><br/>
+		<h:inputHidden value="#{alunoBean.aluno.id}"/>
+		Nome: <h:inputText value="#{alunoBean.aluno.nome}"></h:inputText><br/>
+		Email: <h:inputText value="#{alunoBean.aluno.email}">
+			<f:validator validatorId="emailValidator"></f:validator>
+		</h:inputText><br/> 
+		Matricula: <h:inputText value="#{alunoBean.aluno.matricula}"></h:inputText><br/> 
+		Data de nascimento: <h:inputText value="#{alunoBean.aluno.dataNascimento}">
+									<f:convertDateTime pattern="dd/mm/yyyy"></f:convertDateTime>
+								  </h:inputText><br/><br/> 
+		<h:commandButton action="#{alunoBean.salvar()}" value="#{alunoBean.showId ? 'Editar' : 'Salvar'}"></h:commandButton>
+	</h:form>
+	
+	<h:dataTable value="#{alunoBean.alunos}" var="aluno" border="1">
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Id"/>
+			</f:facet>
+			<h:outputText value="#{aluno.id}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Nome"/>
+			</f:facet>
+			<h:outputText value="#{aluno.nome}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Matricula"/>
+			</f:facet>
+			<h:outputText value="#{aluno.matricula}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">
+				<h:outputText value="Data Nasc"/>
+			</f:facet>
+			<h:outputText value="#{aluno.dataNascimento}" >
+				<f:convertDateTime pattern="dd/mm/yyyy" />
+			</h:outputText>
+		</h:column>
+		<h:column>
+			<h:form>
+				<h:commandButton value="Editar" action="#{alunoBean.carregar(aluno)}"/>
+				<h:commandButton value="Remover" action="#{alunoBean.remover(aluno)}" onclick="if(!confirm('Deseja remover o aluno?')){return false}"/>
+			</h:form>
+		</h:column>
+	</h:dataTable>
+	
+</h:body>
+</html>

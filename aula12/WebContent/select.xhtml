@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Site</title>
+</h:head>
+<h:body>
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="north" size="100" >
+			<h1>Loja UFC</h1>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west" size="200" header="Menu"
+			collapsible="true">
+			
+			<p:commandLink value="Produtos" target="/panel.jsf"></p:commandLink>			
+			
+		</p:layoutUnit>
+
+
+		<p:layoutUnit position="center">
+        	<p:panel header="Nova Venda" >
+        		<h:form>
+        			<p:growl id="msg" autoUpdate="true" showDetail="true" ></p:growl>
+	        		<h:panelGrid columns="2">
+	        			<p:outputLabel value="Produto:"></p:outputLabel>
+	        			<p:selectOneMenu value="#{vendaBean.venda.produto}">
+	        				<f:converter converterId="produtoConverter"></f:converter>
+	        				<f:selectItems value="#{produtoBean.produtos}" var="p" itemLabel="#{p.nome}"></f:selectItems>
+	        			</p:selectOneMenu>
+	        			
+	        			<p:outputLabel value="Data:"></p:outputLabel>
+	        			<p:calendar id="inline" value="#{vendaBean.venda.data}" mode="inline" />
+	        			
+	        			<p:commandButton actionListener="#{vendaBean.salvarVenda}" update="msg" value="Salvar"/>
+	        		</h:panelGrid>
+        		</h:form>
+        	</p:panel>
+    	</p:layoutUnit>
+
+	</p:layout>
+</h:body>
+</html>

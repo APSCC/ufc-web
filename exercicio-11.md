@@ -1,7 +1,7 @@
 ## JSF - Validadores
 ### Exercício
 
-Utilizando como base os exercícios [9](exercicio-9) e [10](exercicio-10), `utilize os validadores` JSF para implementar as seguintes regras de negócio.
+Utilizando como base os exercícios [9](exercicio-9.md) e [10](exercicio-10.md), `utilize os validadores` JSF para implementar as seguintes regras de negócio.
 
 * Em página Alunos que deve ter o CRUD de Aluno ([9](exercicio-9)):
   * Campo email deve seguir o padrao [`usuario`]@[`dominio`]

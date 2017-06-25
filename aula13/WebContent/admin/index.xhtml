@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Loja</title>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit position="top">
+			Admin - <h:outputText value="#{loginBean.usuario}" />
+		</p:layoutUnit>
+		<p:layoutUnit position="center">
+			<h2>Cadastrar venda</h2>
+			<p:messages autoUpdate="true" />
+			<p:separator />
+			<h:form>
+				<h3>Preço</h3>
+				<h:panelGrid columns="2" cellpadding="5">
+					Valor: 
+					<p:inputNumber value="#{vendaBean.venda.valorTotal}"
+						decimalPlaces="2" />
+					Desconto: 
+					<p:inputNumber value="#{vendaBean.venda.desconto}"
+						decimalPlaces="0" />
+				</h:panelGrid>
+
+				<h3>Itens</h3>
+				<h:panelGrid columns="2" cellpadding="5">
+				Produto: <p:inputText value="#{vendaBean.newItem.nomeProduto}" />
+				Quantidade: <p:inputNumber value="#{vendaBean.newItem.quantidade}"
+						decimalPlaces="0" />
+					<br />
+					<h:commandButton action="#{vendaBean.addItem()}" value="Adicionar" />
+				</h:panelGrid>
+			</h:form>
+			<p:dataTable var="i" value="#{vendaBean.venda.items}"
+				style="width: 50%">
+				<p:column headerText="Produto">
+					<h:outputText value="#{i.nomeProduto}" />
+				</p:column>
+				<p:column headerText="Quantidade">
+					<h:outputText value="#{i.quantidade}" />
+				</p:column>
+			</p:dataTable>
+			<br/>
+			<h:form>
+				<h:commandButton action="#{vendaBean.salvar()}" value="Salvar" />
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>
